@@ -45,6 +45,6 @@ public class Course {
 
     public void setInstructor(Instructor instructor) {
         this.instructor = instructor;
+        this.instructor.addCourse(this);
     }
-
 }

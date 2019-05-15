@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
 public class HibernateTest {
     public static void main(String[] args) {
@@ -19,8 +16,6 @@ public class HibernateTest {
             i1.setId(100);
             i1.setName("patcyy");
 
-            //List Of Courses
-            List<Course> listOfCourses = new ArrayList<>();
 
             Course c1 = new Course();
             c1.setCourseName("Java");
@@ -30,11 +25,8 @@ public class HibernateTest {
             c2.setCourseName("C");
             c2.setCourseId(2);
 
-            listOfCourses.add(c1);
-            listOfCourses.add(c2);
-
-            //adding to instructor
-            i1.setCourses(listOfCourses);
+            i1.addCourse(c1);
+            i1.addCourse(c2);
 
             //insert in DB
             inserIntoDb(entityManager, i1);

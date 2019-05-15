@@ -1,6 +1,7 @@
 package com.patccy.hibernate;
 
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +24,7 @@ public class Instructor {
     private String email;
 
     @OneToMany(mappedBy = "instructor", cascade = CascadeType.ALL)
-    private List<Course> courses;
+    private List<Course> courses = new CopyOnWriteArrayList<>();
 
     public int getId() {
         return id;
@@ -55,5 +56,12 @@ public class Instructor {
 
     public void setEmail(String string) {
         this.email = string;
+    }
+
+    public void addCourse(Course course) {
+        if (!courses.contains(course)) {
+            courses.add(course);
+            course.setInstructor(this);
+        }
     }
 }
